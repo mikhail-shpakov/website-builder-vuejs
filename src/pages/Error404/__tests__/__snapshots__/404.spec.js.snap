@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Error404 when load page, renders correctly 1`] = `
+<div class="hero is-medium">
+  <div class="hero-body">
+    <div class="columns">
+      <div class="column img-404"></div>
+      <div class="column is-one-third">
+        <p class="title-404 has-text-dark">404</p>
+        <p class="subtitle-404 has-text-dark">Страница не найдена</p>
+        <div class="tip-404">Возможно, она была удалена, или ее адрес изменился</div><a type="button" class="button is-success">
+          <!----> <span>Вернуться на главную</span>
+          <!----></a>
+      </div>
+    </div>
+  </div>
+</div>
+`;
