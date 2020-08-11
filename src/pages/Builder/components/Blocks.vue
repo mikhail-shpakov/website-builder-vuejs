@@ -1,11 +1,16 @@
 <template lang="pug">
 vue-draggable-resizable(
+  :drag-handle="'.drag-handle'"
+  :y="0"
   :x="-330"
+  :enable-native-drag="true"
 )
   #blocks-container
-    p.c-subtitle
-      b-icon(icon="drag-horizontal")
-      | Положение этого блока можно изменить, перетащив его
+    .drag-handle
+      p.c-subtitle
+        b-icon(icon="drag-horizontal")
+        | Положение этого блока можно изменить, перетащив его
+
     p.c-title
       b-tooltip(
         :label="!isCollapsed.blocks ? 'Свернуть' : 'Развернуть'"
@@ -19,16 +24,22 @@ vue-draggable-resizable(
           @click="isCollapsed.blocks = !isCollapsed.blocks"
         ) Блоки
     b-collapse(:open="!isCollapsed.blocks")
-      .block-preview(
-        v-for="block in listAvailableBlocks"
-        :key="block.type"
+      draggable.dragArea.list-group(
+        :list="listAvailableBlocks"
+        :group="{ name: 'blocks', pull: 'clone', put: false }"
+        @start="addUniqueId()"
       )
-        figure.image.is-3by2
-          img(
-            :src="getImg(block.type)"
-            :alt="block.type"
-          )
-        p.block-preview-title {{ block.name }}
+        .block-preview(
+          v-for="block in listAvailableBlocks"
+          :key="block.type"
+        )
+          figure.image.is-16by9
+            img(
+              :src="getImg(block.type)"
+              :alt="block.type"
+            )
+          p.block-preview-title {{ block.name }}
+
     p.c-title
       b-tooltip(
         :label="!isCollapsed.options ? 'Свернуть' : 'Развернуть'"
@@ -48,17 +59,22 @@ vue-draggable-resizable(
         b-input(v-model.trim.number="width")
       b-field(label="Высота сайта")
         b-input(v-model.trim.number="height")
+
     .block-save
       b-button(
-      type="is-primary"
+        type="is-success"
       ) Сохранить проект
 </template>
 
 <script>
 import { mapFields } from 'vuex-map-fields'
+import draggable from 'vuedraggable'
 
 export default {
   name: 'Blocks',
+  components: {
+    draggable
+  },
   data () {
     return {
       isCollapsed: {
@@ -67,14 +83,17 @@ export default {
       },
       listAvailableBlocks: [
         {
+          id: null,
           type: 'header',
           name: 'Заголовок'
         },
         {
+          id: null,
           type: 'text',
           name: 'Текст'
         },
         {
+          id: null,
           type: 'img',
           name: 'Изображение'
         }
@@ -91,24 +110,27 @@ export default {
   methods: {
     getImg (name) {
       return require(`@/assets/blocks-preview/${name}.svg`)
+    },
+    addUniqueId () {
+      this.listAvailableBlocks.forEach(e => {
+        e.id = Math.random().toString(36).substring(7)
+      })
     }
-  },
-  async mounted () {
   }
 }
 </script>
 
 <style lang="sass" scoped>
 div.draggable
+  position: absolute
+  top: 0
   border: none
+  z-index: 99 !important
   &::v-deep .handle
     background: none
     border: none
 
 div#blocks-container
-  position: absolute
-  top: 0
-  left: 0
   border: 1px solid $color-alt-opacity
   box-shadow: 5px 5px 10px 0 rgba(0,0,0,.1)
   padding: 15px 30px
@@ -133,10 +155,13 @@ div#blocks-container
       text-align: center
       padding: 5px
 
+  .drag-handle
+    margin: 0 -30px
+    cursor: move
   p.c-subtitle
     color: $color-alt
     font-size: 14px
-    margin-bottom: 25px
+    margin: 0 30px 30px
     span.icon
       position: relative
       top: 4px

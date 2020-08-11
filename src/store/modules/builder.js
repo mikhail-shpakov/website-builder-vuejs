@@ -7,7 +7,8 @@ const state = {
       grid: true,
       width: 960,
       height: 960
-    }
+    },
+    blocks: []
   },
   history: []
 }
@@ -18,12 +19,21 @@ const getters = {
 
 const mutations = {
   updateField,
-  SAVE_META_RESULT (state, data) {
+  SAVE_BLOCK_STATE (state, blockState) {
+    const currentBlock = state.current.blocks.find(e => e.id === blockState.id)
+    currentBlock.attributes = blockState.attributes.slice()
+  },
+  DELETE_BLOCK (state, id) {
+    state.current.blocks = state.current.blocks.filter(e => e.id !== id)
   }
 }
 
 const actions = {
-  SAVE_PROJECT: (context, status) => {
+  SAVE_BLOCK_STATE: (context, blockState) => {
+    context.commit('SAVE_BLOCK_STATE', blockState)
+  },
+  DELETE_BLOCK: (context, id) => {
+    context.commit('DELETE_BLOCK', id)
   }
 }
 

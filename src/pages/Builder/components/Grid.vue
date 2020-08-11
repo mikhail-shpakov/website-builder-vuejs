@@ -23,10 +23,6 @@ export default {
     options: {
       deep: true,
       handler () {
-        const canvas = document.getElementById('grid')
-        const context = canvas.getContext('2d')
-
-        context.fillRect(100, 100, 64, 64)
       }
     }
   },
@@ -34,8 +30,6 @@ export default {
     drawGrid () {
       const canvas = document.getElementById('grid')
       const context = canvas.getContext('2d')
-
-      context.clearRect(0, 0, canvas.width, canvas.height)
 
       const width = this.options.width
       const height = this.options.height
@@ -50,7 +44,8 @@ export default {
         context.lineTo(height, y)
       }
 
-      context.strokeStyle = '#BDC3C7'
+      context.translate(0.5, 0.5)
+      context.strokeStyle = 'rgba(189, 195, 199, 0.4)'
       context.stroke()
     }
   },
@@ -64,7 +59,6 @@ export default {
 #grid
   min-width: 100%
   min-height: 100%
-  position: absolute
   border: 1px solid $color-alt
   margin-bottom: 50px
 </style>
