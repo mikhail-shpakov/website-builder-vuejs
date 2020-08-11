@@ -48,14 +48,18 @@ div.topbar
       width: $display-width
       margin: auto
       padding: 5px 0
+      z-index: 9999
   .is-divider
-    border-bottom: 1px solid $color-alt
+    border-bottom: 1px solid $color-alt-opacity
+    box-shadow: 5px 5px 10px 0 rgba(0,0,0,.1)
     width: 100%
     z-index: 100
     position: fixed
-    top: 52px
+    height: 53px
+    background: white
+    top: 0
     @media (min-width: $display-bp-desktop)
-      top: 62px
+      height: 63px
   .navbar-item img
     max-height: 30px
     @media (min-width: $display-bp-desktop)
