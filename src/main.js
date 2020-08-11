@@ -9,9 +9,16 @@ import 'regenerator-runtime/runtime'
 import router from './router'
 import store from './store'
 
+import VueDraggableResizable from 'vue-draggable-resizable'
+import 'vue-draggable-resizable/dist/VueDraggableResizable.css'
+
 Vue.use(Buefy, {
-  defaultIconPack: 'mdi'
+  defaultIconPack: 'mdi',
+  defaultTooltipType: 'is-dark',
+  defaultTooltipAnimated: true
 })
+
+Vue.component('vue-draggable-resizable', VueDraggableResizable)
 
 Vue.config.productionTip = false
 

@@ -24,8 +24,10 @@
     "register-service-worker": "^1.7.1",
     "secure-ls": "^1.2.6",
     "vue": "^2.6.11",
+    "vue-draggable-resizable": "^2.2.0",
     "vue-router": "^3.4.2",
     "vuex": "^3.5.1",
+    "vuex-map-fields": "^1.4.0",
     "vuex-persistedstate": "^3.1.0"
   },
   "devDependencies": {

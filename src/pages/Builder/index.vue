@@ -1,20 +1,28 @@
 <template lang="pug">
-  p Builder page
+.container
+  grid
+
+  blocks
 </template>
 
 <script>
-  export default {
-    name: 'Builder',
-    data () {
-      return {
-      }
-    },
-    methods: {
-    },
-    async mounted () {
+import Blocks from './components/Blocks'
+import Grid from './components/Grid'
+
+export default {
+  name: 'Builder',
+  components: {
+    Blocks,
+    Grid
+  },
+  data () {
+    return {
     }
   }
+}
 </script>
 
 <style lang="sass" scoped>
+div.container
+  height: 960px
 </style>
