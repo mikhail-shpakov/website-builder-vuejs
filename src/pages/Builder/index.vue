@@ -1,5 +1,5 @@
 <template lang="pug">
-.container
+.container(:style="{ height: options.height }")
   blocks
   .page-template
     draggable.dragArea.list-group(
@@ -12,6 +12,13 @@
         :is="block.type + 'Block'"
         :id="block.id"
       )
+    .start-create(v-if="!blocks.length")
+      figure.image.is-4by3
+        img(
+          src="@/assets/start.svg"
+          alt="img-start"
+        )
+      p Перетяните из левого меню любой из блоков, чтобы начать создание своего сайта
   grid
 </template>
 
@@ -34,10 +41,6 @@ export default {
     imgBlock,
     textBlock
   },
-  data () {
-    return {
-    }
-  },
   computed: {
     ...mapFields('builder', [
       'current.blocks',
@@ -49,13 +52,20 @@ export default {
 
 <style lang="sass" scoped>
 div.container
-  height: 960px // TODO
   .page-template
     position: absolute
+    top: 0
     z-index: 5
     .list-group, &
       width: 100%
       height: 100%
+  .start-create
+    @extend .page-template
+    max-width: 550px
+    text-align: center
+    top: 60%
+    left: 50%
+    transform: translate(-50%, -50%)
   .dynamic-component
     box-sizing: border-box
     position: relative

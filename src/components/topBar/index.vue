@@ -17,7 +17,7 @@
       b-button(
         type="is-text"
         tag="router-link"
-        to="Builder"
+        to="Start"
       ) Конструктор
       b-button(
         type="is-text"

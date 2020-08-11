@@ -33,12 +33,12 @@ vue-draggable-resizable(
           v-for="block in listAvailableBlocks"
           :key="block.type"
         )
+          p.block-preview-title {{ block.name }}
           figure.image.is-16by9
             img(
               :src="getImg(block.type)"
               :alt="block.type"
             )
-          p.block-preview-title {{ block.name }}
 
     p.c-title
       b-tooltip(
@@ -62,6 +62,7 @@ vue-draggable-resizable(
 
     .block-save
       b-button(
+        @click="SAVE_PROJECT()"
         type="is-success"
       ) Сохранить проект
 </template>
@@ -69,6 +70,7 @@ vue-draggable-resizable(
 <script>
 import { mapFields } from 'vuex-map-fields'
 import draggable from 'vuedraggable'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'Blocks',
@@ -108,12 +110,16 @@ export default {
     ])
   },
   methods: {
+    ...mapActions('builder', [
+      'SAVE_PROJECT'
+    ]),
     getImg (name) {
       return require(`@/assets/blocks-preview/${name}.svg`)
     },
     addUniqueId () {
-      this.listAvailableBlocks.forEach(e => {
+      this.listAvailableBlocks = this.listAvailableBlocks.map(e => {
         e.id = Math.random().toString(36).substring(7)
+        return Object.assign({}, e)
       })
     }
   }
@@ -150,9 +156,9 @@ div#blocks-container
 
   .block-preview
     margin-bottom: 25px
+    cursor: move
     p.block-preview-title
       font-weight: 500
-      text-align: center
       padding: 5px
 
   .drag-handle

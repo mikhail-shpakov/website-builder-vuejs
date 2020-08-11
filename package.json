@@ -25,6 +25,7 @@
     "secure-ls": "^1.2.6",
     "vue": "^2.6.11",
     "vue-draggable-resizable": "^2.2.0",
+    "vue-moment": "^4.1.0",
     "vue-router": "^3.4.2",
     "vuedraggable": "^2.24.0",
     "vuex": "^3.5.1",
