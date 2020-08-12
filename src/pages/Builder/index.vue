@@ -78,6 +78,7 @@ export default {
     }
   },
   created () {
+    this.checkWindowWidth()
     // отслеживаем размер экрана, чтобы поставить заглушка на конструктор на мобильных устройствах
     window.addEventListener('resize', this.checkWindowWidth)
   },
