@@ -1,25 +1,39 @@
 <template lang="pug">
-.container(:style="{ height: options.height }")
-  blocks
-  .page-template
-    draggable.dragArea.list-group(
-      v-model="blocks"
-      group="blocks"
-    )
-      component.dynamic-component(
-        v-for="block in blocks"
-        :key="block.id"
-        :is="block.type + 'Block'"
-        :id="block.id"
-      )
-    .start-create(v-if="!blocks.length")
+.container
+  template(v-if="mobileStub")
+    .need-desktop
       figure.image.is-4by3
         img(
-          src="@/assets/start.svg"
+          src="@/assets/desktop.svg"
           alt="img-start"
         )
-      p Перетяните из левого меню любой из блоков, чтобы начать создание своего сайта
-  grid
+      p Редактирование сайта недоступно на мобильных устройствах
+      b-button.is-success(
+        tag="router-link"
+        :to="{ path: '/' }"
+      ) Вернуться на главную
+
+  template(v-else)
+    blocks
+    .page-template(:style="calcStyle")
+      draggable.dragArea.list-group(
+        v-model="blocks"
+        group="blocks"
+      )
+        component.dynamic-component(
+          v-for="block in blocks"
+          :key="block.id"
+          :is="block.type + 'Block'"
+          :id="block.id"
+        )
+      .start-create(v-if="!blocks.length")
+        figure.image.is-4by3
+          img(
+            src="@/assets/start.svg"
+            alt="img-start"
+          )
+        p Перетяните из левого меню любой из блоков, чтобы начать создание своего сайта
+    grid
 </template>
 
 <script>
@@ -41,11 +55,34 @@ export default {
     imgBlock,
     textBlock
   },
+  data () {
+    return {
+      mobileStub: 0
+    }
+  },
   computed: {
     ...mapFields('builder', [
       'current.blocks',
       'current.options'
-    ])
+    ]),
+    calcStyle () {
+      return {
+        width: this.options.width + 'px',
+        height: this.options.height + 'px'
+      }
+    }
+  },
+  methods: {
+    checkWindowWidth () {
+      this.mobileStub = !window.matchMedia('(min-width: 960px)').matches
+    }
+  },
+  created () {
+    // отслеживаем размер экрана, чтобы поставить заглушка на конструктор на мобильных устройствах
+    window.addEventListener('resize', this.checkWindowWidth)
+  },
+  destroyed () {
+    window.removeEventListener('resize', this.checkWindowWidth)
   }
 }
 </script>
@@ -53,19 +90,32 @@ export default {
 <style lang="sass" scoped>
 div.container
   .page-template
+    min-width: 960px
     position: absolute
     top: 0
     z-index: 5
+    left: 50%
+    transform: translate(-50%, 0)
     .list-group, &
       width: 100%
       height: 100%
   .start-create
     @extend .page-template
-    max-width: 550px
-    text-align: center
-    top: 60%
+    z-index: -9999
+    position: absolute
+    top: 100px
     left: 50%
-    transform: translate(-50%, -50%)
+    transform: translate(-50%, 0)
+    max-width: 500px
+    min-width: auto
+    text-align: center
+  .need-desktop
+    @extend .start-create
+    top: 50px
+    max-width: 300px
+    p
+      margin-bottom: 15px
+
   .dynamic-component
     box-sizing: border-box
     position: relative
