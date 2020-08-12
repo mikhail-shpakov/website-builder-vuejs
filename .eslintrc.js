@@ -2,7 +2,9 @@ module.exports = {
   root: true,
 
   env: {
-    node: true
+    node: true,
+    commonjs: true,
+    jest: true
   },
 
   extends: [
@@ -21,7 +23,7 @@ module.exports = {
 
   overrides: [
     {
-      files: '**/*.test.js',
+      files: '**/*.spec.js',
       rules: {
         'node/no-unpublished-require': 0,
         'node/no-missing-require': 0

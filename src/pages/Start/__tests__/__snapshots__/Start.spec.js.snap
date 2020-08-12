@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`./Start.vue when load page, Start page renders correctly 1`] = `
+<div class="container">
+  <p class="c-title">Новый сайт</p>
+  <div class="c-card">
+    <b-field-stub label="Название сайта" addons="true">
+      <b-input-stub usehtml5validation="true" value="" type="text" hascounter="true" customclass=""></b-input-stub>
+    </b-field-stub>
+    <b-button-stub type="is-success" nativetype="button" tag="button" disabled="true">Начать проектирование</b-button-stub>
+  </div>
+  <p class="c-title">История</p>
+  <div class="c-card">
+    <b-icon-stub icon="webhook" size="is-large"></b-icon-stub>
+    <p class="site-title">some_name</p>
+    <p class="site-time">Сохранено в </p>
+    <div class="buttons">
+      <b-button-stub type="is-success" nativetype="button" tag="button">Открыть</b-button-stub>
+      <b-button-stub type="is-danger" nativetype="button" tag="button">Удалить</b-button-stub>
+    </div>
+  </div>
+</div>
+`;

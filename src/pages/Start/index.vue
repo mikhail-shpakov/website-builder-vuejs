@@ -5,9 +5,10 @@
     b-field(label="Название сайта")
       b-input(v-model.trim="siteName")
     b-button(
-      @click="CREATE_NEW_SITE(siteName)"
+      @click.native="CREATE_NEW_SITE(siteName)"
       type="is-success"
       :disabled="!siteName"
+      ref="button-create"
     ) Начать проектирование
 
   p.c-title История
@@ -19,17 +20,20 @@
       b-icon(
         :icon="listIcons[randomInteger()]"
         size="is-large"
+        v-once
       )
       p.site-title {{ site.siteName }}
       p.site-time Сохранено в {{ site.saveTime | moment("HH:mm, dddd, Do MMMM YYYY") }}
       .buttons
         b-button(
           type="is-success"
-          @click="OPEN_HISTORY_PROJECT(site.id)"
+          @click.native="OPEN_HISTORY_PROJECT(site.id)"
+          ref="button-open"
         ) Открыть
         b-button(
           type="is-danger"
-          @click="DELETE_HISTORY_PROJECT(site.id)"
+          @click.native="DELETE_HISTORY_PROJECT(site.id)"
+          ref="button-delete"
         ) Удалить
   .history-empty(v-else)
     figure.image.is-4by3
