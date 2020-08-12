@@ -22,7 +22,7 @@
 
 :rocket: [Деплой на Github Pages](#deploy)
 
-## <a name="triangular_ruler"></a>Краткое описание принципов работы приложения
+## <a name="architecture"></a>Общие принципы работы приложения
 
 В приложении используется [Vuex](https://vuex.vuejs.org/) в качестве централизованного хранилища данных
 для всех компонентов. Для обеспечения персистентности данных в рамках одного браузера используется
@@ -73,8 +73,7 @@ Mozilla Firefox ([Gecko](https://ru.wikipedia.org/wiki/Gecko)),
 Microsoft Edge ([EdgeHTML](https://ru.wikipedia.org/wiki/EdgeHTML))
 и Apple Safari ([WebKit](https://ru.wikipedia.org/wiki/WebKit)).
 
-> :warning: Disclaimer :warning:  
-> Приложение не поддерживает работу в Internet Explorer.
+> :warning: Приложение не поддерживает работу в Internet Explorer. :warning:
 
 ## <a name="tools"></a>Список использованных технологий и инструментов
 
@@ -147,7 +146,7 @@ Microsoft Edge ([EdgeHTML](https://ru.wikipedia.org/wiki/EdgeHTML))
 с помощью [Travis CI](https://travis-ci.org/), требуется:
 1. Зарегистрировать аккаунт на [Travis CI](https://travis-ci.org/) и добавить в него проект Github.
 2. Получить персональный токен доступ на Github ([инструкция](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line)) 
-и настроить переменную окружения $GITHUB_TOKEN.
+и добавить в Travis переменную окружения $GITHUB_TOKEN.
 3. Создать в корне проекта файл с описанием опций публикации с названием `.travis.yml`.
 Описание опций можно найти [здесь](https://docs.travis-ci.com/user/deployment/pages/).
 4. Для корректного роутинга SPA на [Github Pages](https://pages.github.com/)
