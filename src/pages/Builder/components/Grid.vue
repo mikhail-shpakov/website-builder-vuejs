@@ -1,9 +1,5 @@
 <template lang="pug">
-canvas#grid(
-  :style="{ display: options.grid ? 'block' : 'none' }"
-  :width="options.width + 'px'"
-  :height="options.height + 'px'"
-)
+#grid(:style="calcStyle")
 </template>
 
 <script>
@@ -11,46 +7,17 @@ import { mapState } from 'vuex'
 
 export default {
   name: 'Grid',
-  data () {
-    return {}
-  },
   computed: {
     ...mapState('builder', {
       options: state => state.current.options
-    })
-  },
-  watch: {
-    options: {
-      deep: true,
-      handler () {
+    }),
+    calcStyle () {
+      return {
+        display: this.options.grid ? 'block' : 'none',
+        width: this.options.width + 'px',
+        height: this.options.height + 'px'
       }
     }
-  },
-  methods: {
-    drawGrid () {
-      const canvas = document.getElementById('grid')
-      const context = canvas.getContext('2d')
-
-      const width = this.options.width
-      const height = this.options.height
-
-      for (let x = 0; x < width; x += 20) {
-        context.moveTo(x, 0)
-        context.lineTo(x, width)
-      }
-
-      for (let y = 0; y < height; y += 20) {
-        context.moveTo(0, y)
-        context.lineTo(height, y)
-      }
-
-      context.translate(0.5, 0.5)
-      context.strokeStyle = 'rgba(189, 195, 199, 0.4)'
-      context.stroke()
-    }
-  },
-  mounted () {
-    this.drawGrid()
   }
 }
 </script>
@@ -59,6 +26,10 @@ export default {
 #grid
   min-width: 100%
   min-height: 100%
+  height: 960px
   border: 1px solid $color-alt
   margin-bottom: 50px
+  background-color: transparent
+  background-image: linear-gradient(0deg, transparent 24%, rgba(0, 0, 0, .15) 25%, rgba(0, 0, 0, .15) 26%, transparent 27%, transparent 74%, rgba(0, 0, 0, .15) 75%, rgba(0, 0, 0, .15) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(0, 0, 0, .15) 25%, rgba(0, 0, 0, .15) 26%, transparent 27%, transparent 74%, rgba(0, 0, 0, .15) 75%, rgba(0, 0, 0, .15) 76%, transparent 77%, transparent)
+  background-size: 50px 50px
 </style>
