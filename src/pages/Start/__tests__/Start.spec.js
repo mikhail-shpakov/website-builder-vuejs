@@ -92,5 +92,4 @@ describe('./Start.vue', () => {
       expect(actions[actionName]).toHaveBeenCalled()
     })
   })
-
 })
