@@ -24,6 +24,10 @@ export default {
 
 <style lang="sass" scoped>
 #grid
+  position: absolute
+  left: 50%
+  transform: translate(-50%, 0)
+  top: 0
   min-width: 100%
   min-height: 100%
   height: 960px

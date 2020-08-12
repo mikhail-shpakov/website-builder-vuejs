@@ -1,12 +1,10 @@
 <template lang="pug">
 .block-container
-  figure.image.is-16by9(
+  img(
     v-if="attributes[0].fileBase64"
+    :src="attributes[0].fileBase64"
+    alt="user image"
   )
-    img(
-      :src="attributes[0].fileBase64"
-      alt="user image"
-    )
 
   b-field(
     :class="{ 'upload-hidden': attributes[0].fileBase64 }"

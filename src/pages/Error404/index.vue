@@ -41,7 +41,7 @@ div
         background-repeat: no-repeat
         background-position: center
         background-image: url("../../assets/404.svg")
-        min-height: 240px
+        min-height: 220px
         @media (min-width: $display-bp-mobile)
           order: 1
           min-height: 350px

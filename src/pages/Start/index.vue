@@ -82,6 +82,8 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+div.container
+  padding: 0 10px
 p.c-title
   font-size: 20px
   font-weight: 500
@@ -92,10 +94,14 @@ div.c-card
   border: 1px solid $color-alt-opacity
   box-shadow: 5px 5px 10px 0 rgba(0,0,0,.1)
   border-radius: 6px
-  min-width: 350px
-  margin: 0 30px 30px 0
+  min-width: 300px
+  max-width: 400px
+  width: 100%
+  margin: 0 0 30px 0
   display: inline-block
   vertical-align: top
+  @media (min-width: $display-bp-mobile)
+    margin: 0 30px 30px 0
   span.icon
     display: block
     margin: -10px auto 30px

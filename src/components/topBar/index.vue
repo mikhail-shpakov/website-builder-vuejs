@@ -53,13 +53,14 @@ div.topbar
     border-bottom: 1px solid $color-alt-opacity
     box-shadow: 5px 5px 10px 0 rgba(0,0,0,.1)
     width: 100%
-    z-index: 100
+    z-index: 0
     position: fixed
     height: 53px
     background: white
     top: 0
     @media (min-width: $display-bp-desktop)
       height: 63px
+      z-index: 100
   .navbar-item img
     max-height: 30px
     @media (min-width: $display-bp-desktop)

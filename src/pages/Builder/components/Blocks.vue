@@ -53,12 +53,24 @@ vue-draggable-resizable(
           @click="isCollapsed.options = !isCollapsed.options"
         ) Опции
     b-collapse(:open="!isCollapsed.options")
-      b-field
-        b-checkbox(v-model="grid") Показать сетку
       b-field(label="Ширина сайта")
         b-input(v-model.trim.number="width")
-      b-field(label="Высота сайта")
-        b-input(v-model.trim.number="height")
+      p.input-subtitle(:class="{ error: width < 960 }") Минимальная ширина сайта 960px
+
+      .is-divider
+      b-field
+        b-checkbox(v-model="grid") Показать сетку
+      b-field(label="Высота сетки")
+        b-input(
+          :disabled="!grid"
+          v-model.trim.number="height"
+        )
+
+      .is-divider
+      b-field(label="Название проекта")
+        b-input(
+          v-model.trim="siteName"
+        )
 
     .block-save
       b-button(
@@ -106,7 +118,8 @@ export default {
     ...mapFields('builder', [
       'current.options.grid',
       'current.options.width',
-      'current.options.height'
+      'current.options.height',
+      'current.siteName'
     ])
   },
   methods: {
@@ -154,6 +167,16 @@ div#blocks-container
     border-radius: 10px
     background-color: rgba(85, 85, 85, 0.25)
 
+  .is-divider
+    border-bottom: 1px solid $color-alt-opacity
+    margin: 25px 0
+
+  p.input-subtitle
+    color: $color-alt
+    font-size: 14px
+    &.error
+      color: $danger
+
   .block-preview
     margin-bottom: 25px
     cursor: move
@@ -173,7 +196,7 @@ div#blocks-container
       top: 4px
       margin-right: 5px
   p.c-title
-    margin-bottom: 20px
+    margin-bottom: 10px
     line-height: 30px
     span.b-tooltip
       line-height: 1.7
