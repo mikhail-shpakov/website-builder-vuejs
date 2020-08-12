@@ -18,7 +18,6 @@
 
 <script>
 import toggleEdit from './toggleEdit.mixin'
-import saveToStore from './saveToStore.mixin'
 import DeleteButton from './DeleteButton'
 
 export default {
@@ -27,8 +26,7 @@ export default {
     DeleteButton
   },
   mixins: [
-    toggleEdit,
-    saveToStore
+    toggleEdit
   ],
   props: {
     id: {

@@ -17,8 +17,5 @@ export default {
     if (blockDataInStore.attributes) {
       this.attributes = blockDataInStore.attributes.slice()
     }
-  },
-  updated () {
-    this.SAVE_BLOCK_STATE({ id: this.id, attributes: this.attributes })
   }
 }

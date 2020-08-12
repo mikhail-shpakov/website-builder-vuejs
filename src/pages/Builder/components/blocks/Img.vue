@@ -75,6 +75,8 @@ export default {
         this.isError = false
         this.attributes[0].fileBase64 = result
       }
+
+      this.SAVE_BLOCK_STATE({ id: this.id, attributes: this.attributes })
     }
   }
 }
@@ -83,6 +85,9 @@ export default {
 <style lang="sass" scoped>
 div.block-container
   position: relative
+  img
+    margin: auto
+    display: block
   .upload-hidden
     display: none
   &:hover .upload-hidden
